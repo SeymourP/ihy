@@ -1,11 +1,16 @@
-from machine import Pin
-from time import sleep
+from machine import Pin, PWM, ADC
 
+# creating PWM and ADC objects
+pwm = PWM(Pin(15))
+adc = ADC(Pin(28))
 
-led = Pin(15, Pin.OUT)
-button = Pin(14, Pin.IN, Pin.PULL_DOWN)
+# setting frequency of PWM output
+pwm.freq(1000)
 
+# continuously control the brightness of the LED using the potentiometer
 while True:
-    if button.value():
-        led.toggle()
-        sleep(0.5)
+    # reading analog values from the potentiometer
+    duty = adc.read_u16()
+    # writing analog values to the LED
+    pwm.duty_u16(duty)
+    print(duty)
