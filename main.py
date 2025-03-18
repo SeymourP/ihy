@@ -1,3 +1,3 @@
-import button_input_to_ble
+import ble_test
 
-button_input_to_ble.demo()
+ble_test.demo()
